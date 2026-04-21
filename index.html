@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jose Miguel Pantigoso · Product Designer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Update</title>
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <div class="wrap">
+  <div class="wrap light" id="mainWrap">
+  <div class="scanline"></div>
+  <div class="content">
+
     <div class="top-bar">
       <div class="top-left">
         <div class="traffic">
@@ -19,7 +20,12 @@
         </div>
         <span class="top-label">~/pantigoso/portfolio — bash</span>
       </div>
-      <span class="status-pill"><span class="dot"></span> deploying v2.0</span>
+      <div class="top-right">
+        <span class="status-pill"><span class="dot"></span> deploying v2.0</span>
+        <div class="toggle-btn" id="toggleBtn" onclick="toggleMode()" title="Cambiar modo">
+          <div class="toggle-knob" id="toggleKnob">☀</div>
+        </div>
+      </div>
     </div>
 
     <div class="hero">
@@ -34,25 +40,25 @@
       </h1>
       <p class="role-line">
         <span class="gr">$</span> engineer
-        <span class="gr">→</span> product_designer
-        <span class="gr">→</span> <span class="bl">ux_researcher</span>
+        <span class="gr">→</span> ux + data
+        <span class="gr">→</span> <span class="bl">product_designer</span>
       </p>
     </div>
 
     <div class="tags-row">
-      <span class="tag t1">Figma</span>
       <span class="tag t1">Product Design</span>
-      <span class="tag t2">Data</span>
-      <span class="tag t2">Prototyping</span>
-      <span class="tag t3">Design System</span>
-      <span class="tag t4">Product Thinking</span>
-      <span class="tag t5">Design Thinking</span>
+      <span class="tag t1">UX Design</span>
+      <span class="tag t2">Product Thinking</span>
+      <span class="tag t2">Data-Driven</span>
+      <span class="tag t3">Prototyping</span>
+      <span class="tag t4">Design Systems</span>
+      <span class="tag t5">Figma</span>
     </div>
 
     <div class="mid-row">
       <div class="desc-block">
         <p class="block-label">// readme.md</p>
-        <p>Migrando casos de estudio a una versión más completa. Soy ingeniero con foco en diseño de producto — pienso en sistemas, diseño para personas.</p>
+        <p>Migrando mis casos de estudio hacia una versión más sólida y estratégica. Ingeniero enfocado en diseño de producto: pienso en sistemas, diseño para personas.</p>
       </div>
       <div class="progress-block">
         <div class="prog-top">
@@ -74,11 +80,11 @@
           <div class="step" id="s4"></div>
         </div>
         <div class="step-labels">
-          <span class="step-lbl" id="l0">figma</span>
-          <span class="step-lbl" id="l1">frames</span>
-          <span class="step-lbl" id="l2">visual</span>
-          <span class="step-lbl" id="l3">cases</span>
-          <span class="step-lbl" id="l4">deploy</span>
+          <span class="step-lbl" id="l0">discover</span>
+          <span class="step-lbl" id="l1">define</span>
+          <span class="step-lbl" id="l2">design</span>
+          <span class="step-lbl" id="l3">validate</span>
+          <span class="step-lbl" id="l4">launch</span>
         </div>
       </div>
     </div>
@@ -101,70 +107,70 @@
 
     <div class="footer-line">
       <span>© 2026 Miguel Pantigoso</span>
-      <span class="sha">sha: a3f9c2d · miguelpantigoso.github.io</span>
+      <span class="sha">sha: a3f9c2d · miguepantigoso.github.io</span>
     </div>
+
   </div>
+</div>
+
 <script>
-    const TARGET = 70;
-    const stages = [
-      { pct: 1,  label: 'initializing...' },
-      { pct: 20, label: 'loading figma files...' },
-      { pct: 40, label: 'compiling wireframes...' },
-      { pct: 60, label: 'building visual layer...' },
-      { pct: 70, label: 'writing case studies...' },
-    ];
-    let current = 0;
-    const fill     = document.getElementById('loaderFill');
-    const num      = document.getElementById('numDisplay');
-    const stageLbl = document.getElementById('loaderStage');
-    const pctTxt   = document.getElementById('loaderPct');
- 
-    function getStageLabel(p) {
-      for (let i = stages.length - 1; i >= 0; i--) {
-        if (p >= stages[i].pct) return stages[i].label;
-      }
-      return 'initializing...';
+  var isDark = false;
+  function toggleMode() {
+    isDark = !isDark;
+    var wrap = document.getElementById('mainWrap');
+    var knob = document.getElementById('toggleKnob');
+    if (isDark) {
+      wrap.className = 'wrap dark';
+      knob.textContent = '☾';
+    } else {
+      wrap.className = 'wrap light';
+      knob.textContent = '☀';
     }
- 
-    function updateSteps(p) {
-      var t = [20, 40, 60, 70, 100];
-      t.forEach(function(v, i) {
-        var el = document.getElementById('s' + i);
-        var lb = document.getElementById('l' + i);
-        var nx = t[i + 1] || 101;
-        if (p >= v) {
-          if (p < nx && i < 4) {
-            el.className = 'step active';
-            lb.className = 'step-lbl active';
-          } else {
-            el.className = 'step done';
-            lb.className = 'step-lbl done';
-          }
-        } else {
-          el.className = 'step';
-          lb.className = 'step-lbl';
-        }
-      });
-    }
- 
-    function tick() {
-      if (current < TARGET) { current += 1; } else { current = 0; }
-      var d = current <= TARGET ? current : TARGET;
-      fill.style.width     = d + '%';
-      num.innerHTML        = d + '<sup>%</sup>';
-      pctTxt.textContent   = d + '%';
-      stageLbl.textContent = getStageLabel(d);
-      updateSteps(d);
-      var delay = current === 0 ? 900
-                : current < 30 ? 28
-                : current < 55 ? 38
-                : current < 68 ? 50
-                : current < TARGET ? 70
-                : 1200;
-      setTimeout(tick, delay);
-    }
- 
-    setTimeout(tick, 500);
-  </script>
+  }
+
+  const TARGET = 70;
+  const stages = [
+    { pct: 1,  label: 'initializing...' },
+    { pct: 20, label: 'loading figma files...' },
+    { pct: 40, label: 'compiling wireframes...' },
+    { pct: 60, label: 'building visual layer...' },
+    { pct: 70, label: 'writing case studies...' },
+  ];
+  let current = 0;
+  const fill = document.getElementById('loaderFill');
+  const num = document.getElementById('numDisplay');
+  const stageLbl = document.getElementById('loaderStage');
+  const pctTxt = document.getElementById('loaderPct');
+
+  function getStageLabel(p) {
+    for (let i = stages.length - 1; i >= 0; i--) { if (p >= stages[i].pct) return stages[i].label; }
+    return 'initializing...';
+  }
+  function updateSteps(p) {
+    var t = [20, 40, 60, 70, 100];
+    t.forEach(function(v, i) {
+      var el = document.getElementById('s' + i);
+      var lb = document.getElementById('l' + i);
+      var nx = t[i+1] || 101;
+      if (p >= v) {
+        if (p < nx && i < 4) { el.className = 'step active'; lb.className = 'step-lbl active'; }
+        else { el.className = 'step done'; lb.className = 'step-lbl done'; }
+      } else { el.className = 'step'; lb.className = 'step-lbl'; }
+    });
+  }
+  function tick() {
+    if (current < TARGET) { current += 1; } else { current = 0; }
+    var d = current <= TARGET ? current : TARGET;
+    fill.style.width = d + '%';
+    num.innerHTML = d + '<sup>%</sup>';
+    pctTxt.textContent = d + '%';
+    stageLbl.textContent = getStageLabel(d);
+    updateSteps(d);
+    var delay = current === 0 ? 900 : current < 30 ? 28 : current < 55 ? 38 : current < 68 ? 50 : current < TARGET ? 70 : 1200;
+    setTimeout(tick, delay);
+  }
+  setTimeout(tick, 500);
+</script>
+
 </body>
 </html>
